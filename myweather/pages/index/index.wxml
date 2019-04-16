@@ -1,0 +1,41 @@
+<view class='weather-wrapper'>
+
+  <view calss= 'location-wrapper'>
+    <view class= 'location'>
+      <image class = 'location-icon' src = '/images/location-icon.png'></image>
+      <view class = 'location-text'>{{cityLoc}}</view>
+    </view> <!--➡️需统一变量名-->
+    <view class = 'location-tips'>点击获取当前位置</view>
+  </view>
+
+  <view class='temp'>{{nowTemp}}</view>
+  <view class='weather'>{{nowWeather}}</view>
+  <image class = "weather-bg"
+  src = "{{nowWeatherBackground}}"
+  mode = 'scaleToFill'></image> <!--这里插入文字会直接显示在网页中，要用此注释符-->
+
+  <view class="day-weather" bindtap='onTapDayWeather'><!--bindtap指按下按钮执行onTapDayWeather函数，将在Page中寻找该函数-->
+    <view class="day-text">{{todayDate}}</view>
+    <view class="temp-text">{{todayTemp}}</view>
+  <image class="arrow-icon" src="/images/arrow.png"></image>
+  </view>
+
+</view>
+
+<view class="timetips">
+  <image class="timetips-icon" src="/images/time-icon.png"></image> 
+  <view class="timetips-text">未来24小时天气预测</view>
+ </view>
+
+<scroll-view scroll-x> <!--当scroll拼写错误时，后面的内容依然会显示，只是少了这个可滑动的图层。∴ 网页语言的缩进不敏感，缩进只是为了对我们而言好看而已-->
+  <view class='forecast-list'>  <!--老师的处理方法比我好，当我们用3个横的列表，比9个竖着的列表好。 ➡️ 维度的顺序，应该先选少的，以列出的少为好-->
+      <view class="forecast-item" wx:for="{{hourlyWeather}}">
+        <view class= 'forecast-time'>{{item.time}}</view><!--❓怎么找到的？-->
+        <image class= 'forecast-weather'
+              src='{{item.iconPath}}'>
+        </image>
+        <view class= 'forecast-temp'>{{item.temp}}</view>
+    <!--如果没有class也是可以打印的，那在这里加了class之后，会发生什么变化呢❓ 编译器会去page data中找forecast这个变量-->
+    </view> 
+  </view>
+</scroll-view>

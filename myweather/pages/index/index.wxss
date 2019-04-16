@@ -1,0 +1,127 @@
+.weather-wrapper{
+  position: relative;
+  padding-bottom: 250rpx;/*❗️填充属于这个图层，而边距不属于*/
+  /*这里的padding指的是从上开始的这么多都是空白的，然后才开始有下一个内容。这就是为什么我的location和天气温度平齐*/
+  padding-top: 20rpx; /*这2个padding分别预留给上下的小栏*/
+  /* mistyrose 这个颜色好看！*/
+}
+.weather-bg{
+  position: absolute;/*在屏幕中的绝对距离*/
+  top: 0;
+  left: 0;/*表示和左上角重合*/
+  width: 100%; /*auto值选择占据100%的宽度*/
+  height: 100%;
+  z-index: -1;/*图层顺序在所有的后面。-1是最后一个*/
+}
+.temp{ /*为什么要加.呢？*/
+  /*margin-top是默认白色且空间固定*/
+  font-size: 200rpx;
+  line-height: 280rpx; /*行高是行上下的高度对于字高的倍数，框住字的方框。*/
+  opacity: 0.8; /*文字的深浅指的是 有多黑*/
+  text-align: center;
+  /*如何放到屏幕特定某个位置呢？*/
+}
+.weather{
+  font-size: 40rpx;
+  line-height: 56rpx; 
+  opacity: 0.5; 
+  text-align: center;
+}
+
+.location-wrapper{ /*当用相对位置定位时，默认从父视图的最上面开始放内容。如果使用absolute来定义新视图的位置会如何❓*/
+  margin-bottom: 60rpx; /*和温度数字的margin，通过计算不改变原来的位置*/
+  /*font-size: 30rpx;
+  line-height: 42rpx;
+  color: rgba(0, 0, 0, 0.5)/*为什么不能在祖视图定义颜色和字号大小行高❓*/
+}
+.location{
+  display: flex;
+  color: rgba(0, 0, 0, 0.5);/*只能继承一级，∴ 颜色只能从这一级开始继承❓但是text的字体和行高又能从祖视图继承❓*/
+  align-items: center;/*这是垂直水平居中，item会上下移动*/
+  justify-content: center; /*用于flex视图中，把2个子视图水平居中。只有当横向排列时，才有这个特性，这个是不能放到父视图中的。*/
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+.location-icon{
+  width: 21rpx;
+  height: 30rpx;
+}
+.location-text{
+  padding-left: 10rpx; 
+}
+.location-tips{
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;/*只有文本的情况要用text-align特性，text只有水平居中*/
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+
+.day-weather {/*这是绝对定位，∴ weatherWrapper的padding-bottom没有影响。但是❓怎么知道这个视图在weatherWrapper上方呢？*/
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 40rpx;
+  right: 40rpx;
+  height: 90rpx;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);/*给这个方框加上上边框*/
+  font-size: 30rpx;  /*子视图会继承下面这些属性*/
+  line-height: 42rpx;
+  color: rgba(0, 0, 0, 0.5)
+}
+/*❗day-text不需要定义，因为html的内容就是会显示在页面上的文本。显示dayweather这个视图的属性，然后是day-text默认从最左边开始写，没有居中属性。同时继承了dayweather中的属性。*/
+.temp-text {
+  flex-grow: 1;/*指占据所有位置。❓那怎么显示arrow-icon和今天的日期呢。感觉应该是最右边的位置吧？*/
+  padding-right: 30rpx;/*指的是在这个方框内留下30rpx。∴ 正好给arrow，而且还有margin。否则arrow的margin会跑到外面去。*/
+  text-align: right;
+}
+.arrow-icon {
+  width: 13rpx;
+  height: 24rpx;
+}
+
+.timetips{
+  display: flex; /*子视图需要横排排列，则用flex，其他方式为❓*/
+  justify-content: center; /*❓不懂*/
+  align-items: center;
+  margin-top: 40rpx; /*指的是这个视图框和上一个的白边有多少*/
+  margin-bottom: 45rpx;
+}
+
+.timetips-icon{ /*在方框内，图片需要定义高宽，❗和️图片所在位置*/
+  margin-right: 10rpx;/*指的是这个图片方框的右边要留白多少*/
+  width: 36rpx;/*这个是直接由图片信息中的像素决定的*/
+  height: 28rpx;
+}
+
+.timetips-text{
+  /*方框的大小就是line height一般定义为1.4倍，文字需要定义font-size，和方框的大小line height，❗和️图片所在位置。*/
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.5;
+}
+
+.forecast-list{
+  display: flex;
+}
+.forecast-item{
+  display: flex;
+  width: 120rpx; /*item是单个视图，怎么会有font呢！bugbug！∴ 才不能滑动的*/
+  flex-shrink: 0;/* 表示不需要自动压缩，❗️定义在item里的*/
+  flex-direction: column; /*这句意思❓*/
+  align-items:center; /*在自己的方框内居中对齐*/
+}
+.forecast-time {
+  font-size: 30rpx;
+  line-height: 42rpx; /*从未见过定义text的有width一起*/
+}
+.forecast-weather {
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+.forecast-temp {
+  font-size: 40rpx;
+  line-height: 56rpx
+}
